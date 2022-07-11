@@ -1,0 +1,8 @@
+.acd-check{
+  &:checked + .acd-label + .acd-content{
+    visibility: visible;
+  }
+}
+.acd-content{
+  visibility: hidden;
+}
