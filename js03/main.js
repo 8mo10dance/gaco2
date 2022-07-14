@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const dispatch = attach(document.getElementById("list"));
   const addButton = document.getElementById("add-button");
   addButton.addEventListener("click", () => {
     dispatch(Action("ADD_ITEM"));
@@ -28,6 +29,42 @@ const Action = (type, options = {}) => ({
   ...options,
 });
 
-const dispatch = (action) => {
-  console.log(action);
+const procs = {
+  Pop: (attrs) => ({
+    executeOn: (el) => {
+      console.log(`Pop ${attrs}`);
+    },
+  }),
+  SetTo: (id, attrs) => ({
+    executeOn: (el) => {
+      console.log(`Set ${attrs} to ${id}`);
+    },
+  }),
+  Delete: (id) => ({
+    executeOn: (el) => {
+      console.log(`Delete ${id}`);
+    },
+  }),
+};
+
+const attach = (el) => (action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      [procs.Pop({ ...action })].forEach((proc) => {
+        proc.executeOn(el);
+      });
+      return;
+    case "EDIT_ITEM":
+      [procs.SetTo(action.id, { ...action })].forEach((proc) => {
+        proc.executeOn(el);
+      });
+      return;
+    case "DELETE_ITEM":
+      [procs.Delete(action.id)].forEach((proc) => {
+        proc.executeOn(el);
+      });
+      return;
+    default:
+      throw new Error(`Invalid ${action.type} action dispatched.`);
+  }
 };
