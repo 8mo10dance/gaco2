@@ -30,41 +30,68 @@ const Action = (type, options = {}) => ({
 });
 
 const procs = {
-  Pop: (attrs) => ({
+  InsertInit: (attrs) => ({
     executeOn: (el) => {
-      console.log(`Pop ${attrs}`);
+      console.log(`Insert ${attrs}`);
     },
   }),
-  SetTo: (id, attrs) => ({
+  InsertBefore: (id, attrs) => ({
+    executeOn: (el) => {
+      console.log(`Insert ${attrs} before ${id}`);
+    },
+  }),
+  SetAttributesTo: (id, attrs) => ({
     executeOn: (el) => {
       console.log(`Set ${attrs} to ${id}`);
     },
   }),
-  Delete: (id) => ({
+  Remove: (id) => ({
     executeOn: (el) => {
-      console.log(`Delete ${id}`);
+      console.log(`Remove ${id}`);
+    },
+  }),
+  MoveUp: (id) => ({
+    executeOn: (el) => {
+      console.log(`Move ${id} up`);
+    },
+  }),
+  MoveDown: (id) => ({
+    executeOn: (el) => {
+      console.log(`Move ${id} down`);
     },
   }),
 };
 
-const attach = (el) => (action) => {
-  switch (action.type) {
-    case "ADD_ITEM":
-      [procs.Pop({ ...action })].forEach((proc) => {
-        proc.executeOn(el);
-      });
-      return;
-    case "EDIT_ITEM":
-      [procs.SetTo(action.id, { ...action })].forEach((proc) => {
-        proc.executeOn(el);
-      });
-      return;
-    case "DELETE_ITEM":
-      [procs.Delete(action.id)].forEach((proc) => {
-        proc.executeOn(el);
-      });
-      return;
-    default:
-      throw new Error(`Invalid ${action.type} action dispatched.`);
-  }
+const attach = (el) => {
+  const items = el.querySelectorAll("li");
+  const dispatch = (action) => {
+    switch (action.type) {
+      case "ADD_ITEM":
+        if (items == null) {
+          procs.InsertInit({ ...action }).executeOn(el);
+          return;
+        }
+
+        procs.InsertBefore(1, { ...action }).executeOn(el);
+        for (const item of items) {
+          procs.MoveDown(item.dataset.id, { ...action }).executeOn(el);
+        }
+        return;
+      case "EDIT_ITEM":
+        procs.SetAttributesTo(action.id, { ...action }).executeOn(el);
+        return;
+      case "DELETE_ITEM":
+        procs.Remove(action.id).executeOn(el);
+        for (const item of items) {
+          if (item.dataset.id > action.id) {
+            procs.MoveUp(item.dataset.id).executeOn(el);
+          }
+        }
+        return;
+      default:
+        throw new Error(`Invalid ${action.type} action dispatched.`);
+    }
+  };
+
+  return dispatch;
 };
