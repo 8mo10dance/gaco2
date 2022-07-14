@@ -20,29 +20,63 @@ const Action = (type, options = {}) => ({
 const procs = {
   InsertInit: (attrs) => ({
     migrateTo: (el) => {
-      console.log(`Insert ${attrs}`);
+      el.appendChild(Item(1, attrs));
     },
   }),
   InsertBefore: (id, attrs) => ({
     migrateTo: (el) => {
-      console.log(`Insert ${attrs} before ${id}`);
+      const target = el.querySelector(`li[data-id="${id}"]`);
+      el.insertBefore(Item(id, attrs), target);
     },
   }),
   Remove: (id) => ({
     migrateTo: (el) => {
-      console.log(`Remove ${id}`);
+      const target = el.querySelector(`li[data-id="${id}"]`);
+      el.removeChild(target);
     },
   }),
   MoveUp: (id) => ({
     migrateTo: (el) => {
-      console.log(`Move ${id} up`);
+      const target = el.querySelector(`li[data-id="${id}"]`);
+      target.setAttribute("data-id", Number(id) - 1);
     },
   }),
   MoveDown: (id) => ({
     migrateTo: (el) => {
-      console.log(`Move ${id} down`);
+      const target = el.querySelector(`li[data-id="${id}"]`);
+      target.setAttribute("data-id", Number(id) + 1);
     },
   }),
+};
+
+const Item = (id, attrs) => {
+  const li = document.createElement("li");
+  li.setAttribute("data-id", id);
+  li.appendChild(
+    (() => {
+      const input = document.createElement("input");
+      input.value = attrs["value"] || "";
+      return input;
+    })()
+  );
+  li.appendChild(
+    (() => {
+      const btn = document.createElement("button");
+      btn.setAttribute("class", "js-edit-button");
+      btn.innerHTML = "edit";
+      return btn;
+    })()
+  );
+  li.appendChild(
+    (() => {
+      const btn = document.createElement("button");
+      btn.setAttribute("class", "js-delete-button");
+      btn.innerHTML = "delete";
+      return btn;
+    })()
+  );
+
+  return li;
 };
 
 const attach = (el) => {
