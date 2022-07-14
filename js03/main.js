@@ -4,17 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   addButton.addEventListener("click", () => {
     dispatch(Action("ADD_ITEM"));
   });
-  for (const btn of document.querySelectorAll("#list .js-edit-button")) {
-    btn.addEventListener("click", (elem) => {
-      const li = elem.target.closest("li");
-      dispatch(
-        Action("EDIT_ITEM", {
-          id: li.dataset.id,
-          value: li.querySelector("input").value,
-        })
-      );
-    });
-  }
   for (const btn of document.querySelectorAll("#list .js-delete-button")) {
     btn.addEventListener("click", (elem) => {
       const li = elem.target.closest("li");
@@ -37,11 +26,6 @@ const procs = {
   InsertBefore: (id, attrs) => ({
     migrateTo: (el) => {
       console.log(`Insert ${attrs} before ${id}`);
-    },
-  }),
-  SetAttributesTo: (id, attrs) => ({
-    migrateTo: (el) => {
-      console.log(`Set ${attrs} to ${id}`);
     },
   }),
   Remove: (id) => ({
@@ -75,9 +59,6 @@ const attach = (el) => {
         for (const item of items) {
           procs.MoveDown(item.dataset.id, { ...action }).migrateTo(el);
         }
-        return;
-      case "EDIT_ITEM":
-        procs.SetAttributesTo(action.id, { ...action }).migrateTo(el);
         return;
       case "DELETE_ITEM":
         procs.Remove(action.id).migrateTo(el);
