@@ -9,13 +9,13 @@ const getAddButton = () => document.getElementById("js-add-button");
 const popItem = () => {
   const list = document.getElementById("js-list");
   const items = list.querySelectorAll("li");
+  const newItem = createItem(1);
   if (items.length === 0) {
-    const newItem = createItem(1);
     insertInit(list, newItem);
     return;
   }
 
-  console.log("insert before 1");
+  insertBefore(list, newItem, items[0]);
   for (const item of items) {
     console.log(`move ${item.dataset.id} down`);
   }
@@ -23,6 +23,10 @@ const popItem = () => {
 
 const insertInit = (target, el) => {
   target.appendChild(el);
+};
+
+const insertBefore = (parent, el, target) => {
+  parent.insertBefore(el, target);
 };
 
 const createItem = (id) => {
