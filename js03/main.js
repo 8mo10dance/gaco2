@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const addButton = document.getElementById("js-add-button");
-  addButton.addEventListener("click", () => {
-    console.log("hoge");
+  getAddButton().addEventListener("click", () => {
+    popItem();
   });
 });
+
+const getAddButton = () => document.getElementById("js-add-button");
+
+const popItem = () => {
+  console.log("pop new item");
+};
