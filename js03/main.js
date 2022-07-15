@@ -1,3 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("hoge");
+  const addButton = document.getElementById("js-add-button");
+  addButton.addEventListener("click", () => {
+    console.log("hoge");
+  });
 });
