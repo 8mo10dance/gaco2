@@ -7,27 +7,36 @@ document.addEventListener("DOMContentLoaded", () => {
 const getAddButton = () => document.getElementById("js-add-button");
 
 const popItem = () => {
-  const list = document.getElementById("js-list");
-  const items = list.querySelectorAll("li");
+  const listEl = document.getElementById("js-list");
+  const list = List(listEl);
+  const itemEls = listEl.querySelectorAll("li");
   const newItem = createItem(1);
-  if (items.length === 0) {
-    insertInit(list, newItem);
+  if (itemEls.length === 0) {
+    list.insertInit(newItem);
     return;
   }
 
-  insertBefore(list, newItem, items[0]);
-  for (const item of items) {
-    moveDown(item);
+  list.insertBefore(newItem, itemEls[0]);
+  for (const el of itemEls) {
+    const item = Item(el);
+    item.moveDown();
   }
 };
 
-const insertInit = (target, el) => {
-  target.appendChild(el);
-};
+const List = (listEl) => ({
+  insertInit: (newEl) => {
+    listEl.appendChild(newEl);
+  },
+  insertBefore: (newEl, targetEl) => {
+    listEl.insertBefore(newEl, targetEl);
+  },
+});
 
-const insertBefore = (parent, el, target) => {
-  parent.insertBefore(el, target);
-};
+const Item = (itemEl) => ({
+  moveDown: () => {
+    itemEl.setAttribute("data-id", Number(itemEl.dataset.id) + 1);
+  },
+});
 
 const createItem = (id) => {
   const li = document.createElement("li");
@@ -37,8 +46,4 @@ const createItem = (id) => {
     .content.cloneNode(true);
   li.appendChild(input);
   return li;
-};
-
-const moveDown = (target) => {
-  target.setAttribute("data-id", Number(target.dataset.id) + 1);
 };
