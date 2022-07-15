@@ -10,7 +10,8 @@ const popItem = () => {
   const list = document.getElementById("js-list");
   const items = list.querySelectorAll("li");
   if (items.length === 0) {
-    console.log("insert init");
+    const newItem = createItem(1);
+    insertInit(list, newItem);
     return;
   }
 
@@ -18,4 +19,18 @@ const popItem = () => {
   for (const item of items) {
     console.log(`move ${item.dataset.id} down`);
   }
+};
+
+const insertInit = (target, el) => {
+  target.appendChild(el);
+};
+
+const createItem = (id) => {
+  const li = document.createElement("li");
+  li.setAttribute("data-id", id);
+  const input = document
+    .getElementById("js-item-template")
+    .content.cloneNode(true);
+  li.appendChild(input);
+  return li;
 };
