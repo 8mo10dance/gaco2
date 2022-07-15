@@ -17,7 +17,7 @@ const popItem = () => {
 
   insertBefore(list, newItem, items[0]);
   for (const item of items) {
-    console.log(`move ${item.dataset.id} down`);
+    moveDown(item);
   }
 };
 
@@ -37,4 +37,8 @@ const createItem = (id) => {
     .content.cloneNode(true);
   li.appendChild(input);
   return li;
+};
+
+const moveDown = (target) => {
+  target.setAttribute("data-id", Number(target.dataset.id) + 1);
 };
