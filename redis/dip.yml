@@ -7,3 +7,6 @@ interaction:
   bundle:
     service: app
     command: bundle
+  rails:
+    service: app
+    command: bundle exec rails
