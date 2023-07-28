@@ -3,3 +3,12 @@ version: '3'
 services:
   redis:
     image: 'redis:latest'
+  app:
+    image: ruby:3.2.0
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+      - bundle:/usr/local/bundle
+
+volumes:
+  bundle:
