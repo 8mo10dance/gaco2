@@ -3,6 +3,8 @@ version: '3'
 services:
   redis:
     image: 'redis:latest'
+    ports:
+      - '6379:6379'
   app:
     image: ruby:3.2.0
     working_dir: /app
@@ -12,6 +14,8 @@ services:
     ports:
       - '3000:3000'
     command: bundle exec rails s -b 0.0.0.0
+    depends_on:
+      - redis
 
 volumes:
   bundle:
