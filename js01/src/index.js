@@ -4,4 +4,7 @@ import 'slick-carousel/slick/slick-theme.css'
 
 $(function () {
   $('.single-item').slick();
+  $('.single-item').on('beforeChange', function () {
+    console.log('hoge')
+  })
 })
