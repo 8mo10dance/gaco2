@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
@@ -7,6 +8,12 @@ module.exports = {
     filename: 'bundle.js'
   },
   mode: 'development',
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      'jQuery': 'jquery'
+    })
+  ],
   devServer: {
     compress: true,
     port: 9000

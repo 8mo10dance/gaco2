@@ -1,1 +1,3 @@
-console.log("hoge")
+$(function () {
+  console.log("hoge")
+})
