@@ -10,5 +10,6 @@ CarrierWave.configure do |config|
     region:            ENV.fetch('S3_REGION'),
     access_key_id:     ENV.fetch('S3_ACCESS_KEY'),
     secret_access_key: ENV.fetch('S3_SECRET_KEY'),
+    endpoint: ENV.fetch('S3_ENDPOINT')
   }
 end
