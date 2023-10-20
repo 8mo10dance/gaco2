@@ -4,4 +4,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :test do
+    resource :hoge, only: :show
+    resource :fuga, only: :show
+  end
 end
