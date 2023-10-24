@@ -5,5 +5,12 @@
   <%= @user.name %>
 </p>
 
+<p>
+  <strong>Avatar:</strong>
+  <% if @user.avatar.present? %>
+    <%= image_tag @user.avatar.url %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
