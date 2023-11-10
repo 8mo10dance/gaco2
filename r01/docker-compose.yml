@@ -12,6 +12,8 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: dummy
       AWS_SECRET_ACCESS_KEY: dummy
+    stdin_open: true
+    tty: true
     command: bundle exec rails s -b 0.0.0.0
   localstack:
     image: localstack/localstack:0.14.5
