@@ -20,7 +20,7 @@
 
 4. S3のバケットを作成する
   ```bash
-  $ aws --endpoint-url=http://localhost:4566 --profile localstack s3api create-bucket --bucket microposts
+  $ aws --endpoint-url=http://localhost:4566 --profile localstack s3api create-bucket --bucket microposts --create-bucket-configuration LocationConstraint=ap-northeast-1
   ```
   以下のコマンドでバケット一覧を確認できる。
   ```bash
