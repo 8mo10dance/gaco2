@@ -4,3 +4,6 @@ interaction:
   bundle:
     service: app
     command: bundle
+
+provision:
+  - dip bundle install

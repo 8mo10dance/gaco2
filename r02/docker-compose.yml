@@ -7,6 +7,10 @@ services:
     volumes:
       - ${PWD}:/app
       - bundle:/usr/local/bundle
+    environment:
+      AWS_ACCESS_KEY_ID: dummy
+      AWS_SECRET_ACCESS_KEY: dummy
+      AWS_REGION: ap-northeast-1
   localstack:
     image: localstack/localstack:0.14.5
     ports:
