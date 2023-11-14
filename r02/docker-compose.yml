@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
+  app:
+    image: ruby:3.2.0
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+      - bundle:/usr/local/bundle
   localstack:
     image: localstack/localstack:0.14.5
     ports:
@@ -12,4 +18,5 @@ services:
       - localstack:/tmp/localstack
 
 volumes:
+  bundle:
   localstack:

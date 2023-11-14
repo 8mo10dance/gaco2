@@ -1,0 +1,6 @@
+version: '4'
+
+interaction:
+  bundle:
+    service: app
+    command: bundle
