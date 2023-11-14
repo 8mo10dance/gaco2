@@ -11,9 +11,7 @@ module Api
         user_avatar.save!
         obj = bucket.object(user_avatar_params[:object_key])
         obj.copy_to(bucket.object(store_dir(user_avatar, 'image')))
-
-        user_avatar = UserAvatar.new(user_avatar_params)
-        render json: { user_avatar_id: user_avatar.id, user_avatar_url: user_avatar.image.url }
+        render json: { user_avatar_id: user_avatar.id }
       end
 
       private
