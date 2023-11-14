@@ -26,21 +26,26 @@ export default class extends Controller {
 
     try {
       const response = await uploadAvatar(file)
-      if (response.ok) {
-        const data = await response.json()
-        this.avatarImageUrl = data['url']
-        /* this.avatarId = data['user_avatar_id'] */
-        /* this.avatarImageUrl = data['user_avatar_url'] */
-      }
+      if (!response.ok) return
+
+      const data = await response.json()
+      this.avatarImageUrl = data['url']
+      const objectKey = data['object_key']
+      const r = await createUserAvatar(objectKey, file.name)
+      if (!r.ok) return
+
+      const d = await d.json()
+      this.avatarId = data['user_avatar_id']
     } catch (err) {
       console.log(err)
     }
   }
 }
 
-function uploadUserAvatar(file) {
+function createUserAvatar(objectKey, filename) {
   const formData = new FormData()
-  formData.append("user_avatar[image]", file)
+  formData.append("user_avatar[object_key]", objectKey)
+  formData.append("user_avatar[filename]", filename)
 
   return apiRequest('/api/v1/user_avatars', { method: 'POST', body: formData })
 }
@@ -49,5 +54,5 @@ function uploadAvatar(file) {
   const formData = new FormData()
   formData.append("avatar", file)
 
-  const apiRequest('/api/v1/upload_avatar', { method: 'POST', body: formData })
+  return apiRequest('/api/v1/upload_avatar', { method: 'POST', body: formData })
 }

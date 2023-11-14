@@ -24,3 +24,11 @@
   ```bash
   $ aws s3 ls --endpoint-url=http://localhost:4566 --profile localstack
   ```
+
+## LocalStack に画像をアップできたかの確認
+
+次のコマンドで確認できる。
+
+```bash
+$ aws s3 ls --endpoint-url=http://localhost:4566 --profile localstack s3://microposts --recursive
+```
