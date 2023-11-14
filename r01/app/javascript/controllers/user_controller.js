@@ -13,6 +13,10 @@ export default class extends Controller {
     const imageEl = document.createElement('img')
     imageEl.src = avatarImageUrl
     imageEl.alt = ''
+    const lastChild = this.avatarImageAreaTarget.lastChild
+    if (lastChild) {
+      this.avatarImageAreaTarget.removeChild(lastChild)
+    }
     this.avatarImageAreaTarget.appendChild(imageEl)
   }
 
