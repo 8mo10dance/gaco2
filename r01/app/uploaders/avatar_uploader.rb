@@ -1,7 +1,14 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+  include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
+
+  process :get_exif_info
+
+  def get_exif_info
+    exif = Magick::Image.read(self.file.file).first.properties
+    binding.pry
+  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
