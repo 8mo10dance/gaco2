@@ -19,6 +19,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /jquery\.min\.js$/,
+        type: 'asset/source',
+      },
     ],
   },
   devServer: {
