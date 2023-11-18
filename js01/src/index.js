@@ -4,5 +4,6 @@ import './theme.css'
 eval(jqueryRawCode)
 
 $(function () {
-  console.log("hoge")
+  hoge = 'hoge'
+  console.log(hoge)
 })
