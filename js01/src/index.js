@@ -1,8 +1,9 @@
-import jqueryRawCode from './jquery.min'
-import './theme.css'
+const jqueryRawCode = require('./jquery.min')
+require('./theme.css')
 
 eval(jqueryRawCode)
 
 $(function () {
-  console.log("hoge")
+  hoge = 'hoge'
+  console.log(hoge)
 })
