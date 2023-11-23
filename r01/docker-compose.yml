@@ -14,15 +14,18 @@ services:
       AWS_SECRET_ACCESS_KEY: dummy
     command: bundle exec rails s -b 0.0.0.0
   localstack:
-    image: localstack/localstack:0.14.5
+    image: localstack/localstack:3.0.0
     ports:
       - '4566:4566'
     environment:
       SERVICES: s3
-      DATA_DIR: /tmp/localstack/data
+  terraform:
+    image: hashicorp/terraform:1.6.4
     volumes:
-      - localstack:/tmp/localstack
+      - ./:/app
+    working_dir: /app
+    depends_on:
+      - localstack
 
 volumes:
   bundle:
-  localstack:
