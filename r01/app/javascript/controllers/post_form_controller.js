@@ -2,14 +2,26 @@ import { Controller } from "@hotwired/stimulus"
 import qs from 'qs'
 
 export default class extends Controller {
+  static targets = ['imagePath', 'imageName']
+
+  set imagePath(path) {
+    this.imagePathTarget.value = path
+  }
+
+  set imageName(name) {
+    this.imageNameTarget.value = name
+  }
+
   async changeImage(event) {
     const file = event.target.files[0]
     if (!file) return
 
     try {
-      const presignedUrl = await getPresignedUrl(file)
-      const response = await uploadFile(presignedUrl, file)
+      const { url, path } = await getPresignedUrl(file)
+      const response = await uploadFile(url, file)
       if (!response.ok) throw Error('Failed to upload the file')
+      this.imagePath = path
+      this.imageName = file.name
     } catch (err) {
       console.log(err)
     }
@@ -22,7 +34,7 @@ async function getPresignedUrl(file) {
   if (!response.ok) throw Error('Invalid response')
 
   const data = await response.json()
-  return data.url
+  return data
 }
 
 function uploadFile(url, file) {
