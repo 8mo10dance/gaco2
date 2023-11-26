@@ -23,6 +23,9 @@ services:
       LOCALSTACK_AUTH_TOKEN: ${LOCALSTACK_AUTH_TOKEN}
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+  lambda_function:
+    build: .
+    image: lambda_function
   terraform:
     image: hashicorp/terraform:1.6.4
     volumes:
@@ -30,6 +33,7 @@ services:
     working_dir: /app
     depends_on:
       - localstack
+      - lambda_function
 
 volumes:
   bundle:
