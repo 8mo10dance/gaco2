@@ -1,3 +1,5 @@
+import numpy
+
 def handler(event, context):
   print(event)
-  return 'Hello from Lambda'
+  return numpy.__version__
