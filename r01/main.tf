@@ -5,10 +5,6 @@ terraform {
       source = "hashicorp/aws"
       version = "~> 5.26"
     }
-    archive = {
-      source = "hashicorp/archive"
-      version = "~> 2.4"
-    }
   }
   backend "local" {}
 }
@@ -43,18 +39,11 @@ resource "aws_s3_bucket_cors_configuration" "my_bucket" {
   }
 }
 
-data "archive_file" "lambda_zip" {
-  type = "zip"
-  source_file = "index.py"
-  output_path = "tmp/lambda.zip"
-}
-
 resource "aws_lambda_function" "my_lambda" {
   function_name = "my_lambda_function"
   role = aws_iam_role.lambda_role.arn
-  handler = "index.handler"
-  runtime = "python3.7"
-  filename = data.archive_file.lambda_zip.output_path
+  package_type = "Image"
+  image_uri = "lambda_function"
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
