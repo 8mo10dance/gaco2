@@ -1,4 +1,11 @@
 terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 5.26"
+    }
+  }
   backend "local" {}
 }
 
@@ -17,8 +24,12 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "my-bucket" {
+resource "aws_s3_bucket" "my_bucket" {
   bucket = "microposts"
+}
+
+resource "aws_s3_bucket_cors_configuration" "my_bucket" {
+  bucket = aws_s3_bucket.my_bucket.id
 
   cors_rule {
     allowed_methods = ["PUT"]
