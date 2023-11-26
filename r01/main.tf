@@ -79,3 +79,28 @@ resource "aws_iam_role" "lambda_role" {
     ],
   })
 }
+
+resource "aws_iam_policy_attachment" "lambda_execution_policy_attachment" {
+  name       = "my_lambda_execution_policy_attachment"
+  policy_arn = aws_iam_policy.lambda_execution_policy.arn
+  roles      = [aws_iam_role.lambda_role.name]
+}
+
+resource "aws_iam_policy" "lambda_execution_policy" {
+  name        = "lambda_execution_policy"
+  description = "Policy for Lambda execution role"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+        ],
+        Effect   = "Allow",
+        Resource = ["arn:aws:s3:::microposts/*"]
+      },
+    ]
+  })
+}
