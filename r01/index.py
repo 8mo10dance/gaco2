@@ -12,6 +12,11 @@ def handler(event, context):
     try:
         # S3から画像をダウンロード
         response = s3_client.get_object(Bucket=bucket_name, Key=object_key)
+        metadata = response.get('Metadata', {})
+
+        if 'processed' in metadata:
+          return
+
         image_data = response['Body'].read()
 
         # 画像を開く
@@ -27,7 +32,8 @@ def handler(event, context):
         buffer.seek(0)
 
         # 画像をS3に再アップロード（上書き）
-        s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=buffer)
+        metadata['processed'] = 'true'
+        s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=buffer, Metadata=metadata, MetadataDirective='REPLACE')
 
         return {
             'statusCode': 200,
