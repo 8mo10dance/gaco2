@@ -1,7 +1,6 @@
-const jqueryRawCode = require('./jquery.min')
-require('./theme.css')
+import $ from 'jquery'
 
-eval(jqueryRawCode)
+require('./theme.css')
 
 $(function () {
   hoge = 'hoge'
