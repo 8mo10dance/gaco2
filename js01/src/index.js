@@ -1,8 +1,8 @@
 import $ from 'jquery'
+import 'slick-carousel'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-require('./theme.css')
-
-$(function () {
-  hoge = 'hoge'
-  console.log(hoge)
+$(document).ready(function() {
+  $('.slick').slick()
 })
