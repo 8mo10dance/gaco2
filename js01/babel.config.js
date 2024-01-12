@@ -12,6 +12,5 @@ module.exports = (api) => {
   return {
     presets,
     env,
-    sourceType: 'script',
   };
 };
