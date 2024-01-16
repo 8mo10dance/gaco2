@@ -4,3 +4,9 @@ interaction:
   bash:
     service: app
     command: bash
+  composer:
+    service: app
+    command: composer
+
+provision:
+  - dip composer install

@@ -2,7 +2,11 @@ version: '3.7'
 
 services:
   app:
-    image: php:7.4-cli
+    build: .
     working_dir: /app
     volumes:
       - ${PWD}:/app
+      - vendor:/app/vendor
+
+volumes:
+  vendor:
