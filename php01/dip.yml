@@ -7,6 +7,9 @@ interaction:
   composer:
     service: app
     command: composer
+  php:
+    service: app
+    command: php
 
 provision:
   - dip composer install
