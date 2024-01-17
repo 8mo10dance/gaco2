@@ -22,3 +22,4 @@ interaction:
 
 provision:
   - dip composer install
+  - dip artisan key:generate
