@@ -1,7 +1,7 @@
 module.exports = (api) => {
   api.cache(true);
 
-  const presets = ["@babel/preset-env"];
+  const presets = ["@babel/preset-env", "@babel/preset-react"];
 
   const env = {
     test: {
@@ -12,6 +12,5 @@ module.exports = (api) => {
   return {
     presets,
     env,
-    sourceType: 'script',
   };
 };

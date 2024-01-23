@@ -1,9 +1,10 @@
-const jqueryRawCode = require('./jquery.min')
-require('./theme.css')
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "./theme.css";
+import App from "./App";
 
-eval(jqueryRawCode)
-
-$(function () {
-  hoge = 'hoge'
-  console.log(hoge)
-})
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("root");
+  const root = createRoot(container);
+  root.render(<App />);
+});
