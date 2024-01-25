@@ -17,8 +17,8 @@ services:
     command: "php artisan serve --host 0.0.0.0"
     ports:
       - "8000:8000"
-    depends_on:
-      - db
+    networks:
+      - app-network
 
   db:
     image: mysql:5.7
@@ -31,6 +31,12 @@ services:
       - "3306:3306"
     volumes:
       - mydb:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   mydb:
