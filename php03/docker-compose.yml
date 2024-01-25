@@ -4,6 +4,8 @@ services:
   app:
     build: ./server
     working_dir: /app
+    environment:
+      APP_ENV: local
     volumes:
       - ${PWD}/server:/app
     command: "php artisan serve --host 0.0.0.0"
