@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('hello/new', 'HelloController@new');
 Route::get('hello/{msg?}', 'HelloController@index');
