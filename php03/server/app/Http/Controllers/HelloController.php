@@ -13,4 +13,9 @@ class HelloController extends Controller
     public function new() {
         return view('hello.new');
     }
+
+    public function create(Request $request) {
+        $name = $request->name;
+        return view('hello.index', ['msg' => 'こんにちは' . $name . 'さん']);
+    }
 }
