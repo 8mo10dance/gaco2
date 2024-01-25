@@ -1,6 +1,5 @@
-<html>
-    <body>
-        <h1>Hello</h1>
-        <p>{{$msg}}</p>
-    </body>
-</html>
+@extends('layouts.hello')
+@section('title', 'Index')
+@section('content')
+<p>{{$msg}}</p>
+@endsection
