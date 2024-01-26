@@ -27,3 +27,4 @@ provision:
   - dip composer install
   - dip artisan key:generate
   - dip bundle install
+  - dip artisan migrate
