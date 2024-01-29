@@ -5,6 +5,8 @@ services:
     build: ./server
     working_dir: /app
     environment:
+      APP_ENV: local
+      APP_DEBUG: TRUE
       BIGQUERY_PROJECT_ID: test
       BIGQUERY_EMULATOR_HOST: http://bigquery:9050
     volumes:
