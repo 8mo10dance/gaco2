@@ -4,6 +4,9 @@ services:
   app:
     build: ./server
     working_dir: /app
+    environment:
+      BIGQUERY_PROJECT_ID: test
+      BIGQUERY_EMULATOR_HOST: http://bigquery:9050
     volumes:
       - ${PWD}/server:/app
     command: "php artisan serve --host 0.0.0.0"
