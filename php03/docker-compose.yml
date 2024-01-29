@@ -9,3 +9,10 @@ services:
     command: "php artisan serve --host 0.0.0.0"
     ports:
       - "8000:8000"
+  bigquery:
+    image: ghcr.io/goccy/bigquery-emulator:latest
+    ports:
+      - "9050:9050"
+    volumes:
+      - ./testdata:/testdata
+    command: "bigquery-emulator --project=test --data-from-yaml=../testdata/data.yaml"
