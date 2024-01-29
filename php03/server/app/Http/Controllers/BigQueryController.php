@@ -16,7 +16,7 @@ class BigQueryController extends Controller
 
     public function queryBigQuery()
     {
-        $query = 'SELECT id, name FROM `dataset1.table_a` WHERE id = 1';
+        $query = 'SELECT id, name FROM `test.dataset1.table_a` WHERE id = 1';
         $queryJobConfig = $this->bigQuery->query($query);
         $results = $this->bigQuery->runQuery($queryJobConfig);
 
