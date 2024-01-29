@@ -11,6 +11,10 @@
 |
 */
 
+use App\Http\Controllers\BigQueryController;
+
+Route::get('/query-bigquery', [BigQueryController::class, 'queryBigQuery']);
+
 Route::get('/', function () {
     return view('welcome');
 });
