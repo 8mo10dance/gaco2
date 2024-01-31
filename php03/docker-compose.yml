@@ -4,8 +4,23 @@ services:
   app:
     build: ./server
     working_dir: /app
+    environment:
+      APP_ENV: local
+      APP_DEBUG: TRUE
+      REDIS_HOST: redis
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
     volumes:
       - ${PWD}/server:/app
     command: "php artisan serve --host 0.0.0.0"
     ports:
       - "8000:8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
