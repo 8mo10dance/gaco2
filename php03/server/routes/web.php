@@ -11,6 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Redis;
+
+Route::get('/redis', function () {
+    Redis::set('name', 'Laravel with Redis');
+    return Redis::get('name');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
