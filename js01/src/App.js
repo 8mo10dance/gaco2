@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
-import {
-  HashRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import React from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 export default function App() {
   return (
@@ -16,12 +12,6 @@ export default function App() {
 }
 
 function Routing() {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log("hoge");
-  }, [location]);
-
   return (
     <Switch>
       <Route path="/" exact>
@@ -32,25 +22,4 @@ function Routing() {
       </Route>
     </Switch>
   );
-}
-
-function Home() {
-  const history = useHistory();
-
-  return (
-    <div>
-      <h1>HOME</h1>
-      <button
-        onClick={() => {
-          history.replace("/");
-        }}
-      >
-        click
-      </button>
-    </div>
-  );
-}
-
-function About() {
-  return <h1>ABOUT</h1>;
 }
