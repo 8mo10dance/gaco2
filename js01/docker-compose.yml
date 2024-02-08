@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  client:
+    image: node:21.6.1-bullseye
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "9000:9000"
+    command: npm run dev
   firebase:
     build: ./.dockerdev/firebase
     working_dir: /app
@@ -10,3 +19,6 @@ services:
       - "9001:9001"
       - "9099:9099"
     command: firebase emulators:start
+
+volumes:
+  node_modules:

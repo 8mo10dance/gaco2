@@ -1,9 +1,18 @@
 version: '4'
 
 interaction:
-  bash:
-    service: firebase
-    command: bash
+  npm:
+    serice: client
+    command: npm
+    subcommands:
+      run dev:
+        service: client
+        command: npm run dev
+        compose:
+          run_options: [service-ports]
   firebase:
     service: firebase
     command: firebase
+
+provision:
+  - dip npm install
