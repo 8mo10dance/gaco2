@@ -1,22 +1,22 @@
-const path = require('path')
+const path = require("path");
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: path.resolve(__dirname, "src/index.js"),
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js",
   },
-  mode: 'development',
+  mode: "development",
   module: {
     rules: [
       {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader',
-          }
+            loader: "babel-loader",
+          },
         ],
-        include: [path.resolve(__dirname, 'src')]
+        include: [path.resolve(__dirname, "src")],
       },
       {
         test: /\.css/,
@@ -30,12 +30,12 @@ module.exports = {
       },
       {
         test: /jquery\.min\.js$/,
-        type: 'asset/source',
+        type: "asset/source",
       },
     ],
   },
   devServer: {
     compress: true,
-    port: 9000
-  }
-}
+    port: 9000,
+  },
+};
