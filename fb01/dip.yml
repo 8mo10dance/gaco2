@@ -1,0 +1,9 @@
+version: '4'
+
+interaction:
+  bash:
+    service: firebase
+    command: bash
+  firebase:
+    service: firebase
+    command: firebase
