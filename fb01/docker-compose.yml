@@ -3,3 +3,10 @@ version: '3.7'
 services:
   firebase:
     build: .
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+    ports:
+      - "9001:9001"
+      - "9099:9099"
+    command: firebase emulators:start
