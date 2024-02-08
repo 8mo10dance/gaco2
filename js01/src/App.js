@@ -6,6 +6,7 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
+import Signup from "./pages/Signup";
 
 export default function App() {
   return (
@@ -29,6 +30,9 @@ function Routing() {
       </Route>
       <Route path="/about">
         <About />
+      </Route>
+      <Route path="/signup">
+        <Signup />
       </Route>
     </Switch>
   );
