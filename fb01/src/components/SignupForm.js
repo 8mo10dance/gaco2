@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { signup } from "../lib/auth";
 
 export default function SignupForm() {
   const { values, handleChange, handleSubmit } = useSignupForm();
@@ -57,7 +58,7 @@ function useSignupForm() {
       }
     },
     handleSubmit: () => {
-      console.log(values);
+      signup(values.email, values.password);
     },
   };
 }
