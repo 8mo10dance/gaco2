@@ -1,0 +1,17 @@
+version: '4'
+
+interaction:
+  bash:
+    service: client
+    command: bash
+  npm:
+    service: client
+    command: npm
+    subcommands:
+      run dev:
+        command: npm run dev
+        compose:
+          run_options: [service-ports]
+
+provision:
+  - dip npm install
