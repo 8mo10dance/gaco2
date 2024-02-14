@@ -26,9 +26,18 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    compile 'org.slf4j:slf4j-simple:1.7.32'
 }
 
 application {
     // Define the main class for the application.
     mainClassName = 'java01.App'
+}
+
+jar {
+  manifest {
+    attributes "Main-Class": "java01.App"
+  }
+  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
