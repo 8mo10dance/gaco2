@@ -3,12 +3,24 @@
  */
 package java01;
 
+import java.io.IOException;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
+    public String getGreeting() throws IOException {
+      FirebaseOptions options = new FirebaseOptions.Builder()
+        .setCredentials(GoogleCredentials.getApplicationDefault())
+        .build();
+
+      FirebaseApp.initializeApp(options);
+
+      return "Hello world.";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(new App().getGreeting());
     }
 }
