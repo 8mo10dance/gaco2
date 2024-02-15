@@ -42,3 +42,7 @@ jar {
   }
   from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
+
+tasks.withType(JavaExec) {
+  environment "FIREBASE_AUTH_EMULATOR_HOST", "localhost:9099"
+}
