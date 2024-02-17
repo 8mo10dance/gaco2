@@ -8,19 +8,41 @@ import java.io.IOException;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 
 public class App {
-    public String getGreeting() throws IOException {
+    public String getGreeting(String uid) throws IOException, FirebaseAuthException {
       FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.getApplicationDefault())
         .build();
 
-      FirebaseApp.initializeApp(options);
-
-      return "Hello world.";
+      UserRecord user = FirebaseAuth.getInstance(FirebaseApp.initializeApp(options)).getUser(uid);
+      return user.getPhoneNumber();
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws IOException, FirebaseAuthException {
+      System.out.println(System.getenv("FIREBASE_AUTH_EMULATOR_HOST"));
+
+      try {
+        FirebaseOptions options = new FirebaseOptions.Builder()
+          .setCredentials(GoogleCredentials.getApplicationDefault())
+          .build();
+        FirebaseApp.initializeApp(options);
+        // ユーザーを作成する例
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+          .setEmail("user111@example.com")
+          .setPassword("password123");
+        UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+        System.out.println("Successfully created new user: " + userRecord.getUid());
+
+        // ユーザー情報を取得する例
+        UserRecord user = FirebaseAuth.getInstance().getUser(userRecord.getUid());
+        System.out.println("Successfully fetched user data: " + user.getUid());
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 }
