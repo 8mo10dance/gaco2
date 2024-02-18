@@ -3,12 +3,31 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+import java.io.IOException;
+
+public class App {
+  public App() throws IOException {
+    FirebaseOptions options = new FirebaseOptions.Builder()
+      .setCredentials(GoogleCredentials.getApplicationDefault())
+      .build();
+    FirebaseApp.initializeApp(options);
+  }
+
+  public UserRecord getUser(String uid) throws FirebaseAuthException {
+    UserRecord user = FirebaseAuth.getInstance().getUser(uid);
+
+    return user;
+  }
+
+    public static void main(String[] args) throws IOException, FirebaseAuthException {
+      App app = new App();
+      System.out.println(app.getUser(args[0]).getPhoneNumber());
     }
 }
