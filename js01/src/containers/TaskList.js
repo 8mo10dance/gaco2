@@ -1,22 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskListComponent from "../components/TaskList";
 import TaskComponent from "../components/Task";
+import TaskFormComponent from "./TaskForm";
 
 export default function TaskListContainer() {
-  const tasks = [newTask()];
-  const handleAdd = () => console.log("add");
+  const [tasks, setTasks] = useState([newTask()]);
+  const [editingTaskUuid, setEditingTaskUuid] = useState(null);
+  const isEditing = (task) => task.uuid === editingTaskUuid;
+  const handleAdd = () => {
+    const task = newTask();
+    setTasks((tasks) => tasks.concat([task]));
+    setEditingTaskUuid(task.uuid);
+  };
   const handleEdit = (task) => () => console.log(`edit ${task.uuid}`);
   const handleRemove = (task) => () => console.log(`remove ${task.uuid}`);
+  const handleSave = (uuid) => (values) =>
+    console.log(`save ${JSON.stringify(values)}`);
 
   return (
     <TaskListComponent
       tasks={tasks}
+      isEditing={isEditing}
       onAdd={handleAdd}
       ItemComponent={(task) => (
         <TaskComponent
           {...task}
           onEdit={handleEdit(task)}
           onRemove={handleRemove(task)}
+        />
+      )}
+      FormComponent={(task) => (
+        <TaskFormComponent
+          defaultValues={task}
+          onSave={handleSave(task.uuid)}
         />
       )}
     />
