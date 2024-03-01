@@ -12,7 +12,9 @@ export default function TaskListContainer() {
     setTasks((tasks) => tasks.concat([task]));
     setEditingTaskUuid(task.uuid);
   };
-  const handleEdit = (task) => () => console.log(`edit ${task.uuid}`);
+  const handleEdit = (task) => () => {
+    setEditingTaskUuid(task.uuid);
+  };
   const handleRemove = (task) => () => console.log(`remove ${task.uuid}`);
   const handleSave = (uuid) => (values) =>
     console.log(`save ${JSON.stringify(values)}`);
