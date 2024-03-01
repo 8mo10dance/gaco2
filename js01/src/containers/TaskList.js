@@ -16,8 +16,14 @@ export default function TaskListContainer() {
     setEditingTaskUuid(task.uuid);
   };
   const handleRemove = (task) => () => console.log(`remove ${task.uuid}`);
-  const handleSave = (uuid) => (values) =>
-    console.log(`save ${JSON.stringify(values)}`);
+  const handleSave = (uuid) => (values) => {
+    const updater = (tasks) =>
+      tasks.map((task) =>
+        task.uuid === uuid ? { ...tasks, ...values } : task,
+      );
+    setTasks(updater);
+    setEditingTaskUuid(null);
+  };
 
   return (
     <TaskListComponent
