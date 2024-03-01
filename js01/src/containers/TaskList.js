@@ -18,9 +18,7 @@ export default function TaskListContainer() {
   const handleRemove = (task) => () => console.log(`remove ${task.uuid}`);
   const handleSave = (uuid) => (values) => {
     const updater = (tasks) =>
-      tasks.map((task) =>
-        task.uuid === uuid ? { ...tasks, ...values } : task,
-      );
+      tasks.map((task) => (task.uuid === uuid ? { ...task, ...values } : task));
     setTasks(updater);
     setEditingTaskUuid(null);
   };
