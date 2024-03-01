@@ -1,56 +1,29 @@
 import React, { useEffect } from "react";
-import {
-  HashRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
-
+import { HashRouter, Switch, Route, useHistory, useLocation, } from "react-router-dom";
 export default function App() {
-  return (
-    <HashRouter>
-      <Routing />
-    </HashRouter>
-  );
+    return (React.createElement(HashRouter, null,
+        React.createElement(Routing, null)));
 }
-
 function Routing() {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log("hoge");
-  }, [location]);
-
-  return (
-    <Switch>
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-    </Switch>
-  );
+    var location = useLocation();
+    useEffect(function () {
+        console.log("hoge");
+    }, [location]);
+    return (React.createElement(Switch, null,
+        React.createElement(Route, { path: "/", exact: true },
+            React.createElement(Home, null)),
+        React.createElement(Route, { path: "/about" },
+            React.createElement(About, null))));
 }
-
 function Home() {
-  const history = useHistory();
-
-  return (
-    <div>
-      <h1>HOME</h1>
-      <button
-        onClick={() => {
-          history.replace("/");
-        }}
-      >
-        click
-      </button>
-    </div>
-  );
+    var history = useHistory();
+    return (React.createElement("div", null,
+        React.createElement("h1", null, "HOME"),
+        React.createElement("button", { onClick: function () {
+                history.replace("/");
+            } }, "click")));
 }
-
 function About() {
-  return <h1>ABOUT</h1>;
+    return React.createElement("h1", null, "ABOUT");
 }
+//# sourceMappingURL=App.js.map
