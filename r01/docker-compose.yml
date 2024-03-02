@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  app:
+    image: ruby:3.2.2
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+      - bundle:/usr/local/bundle
+    environment:
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
+    depends_on:
+      - mailhog
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  bundle:

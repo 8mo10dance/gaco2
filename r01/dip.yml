@@ -1,0 +1,12 @@
+version: '4'
+
+interaction:
+  bundle:
+    service: app
+    command: bundle
+  execute:
+    service: app
+    command: bundle exec ruby main.rb
+
+provision:
+  - dip bundle install
