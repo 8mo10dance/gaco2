@@ -19,8 +19,30 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+      - mailhog
 
   redis:
     image: "redis:alpine"
     ports:
       - "6379:6379"
+
+  ruby:
+    image: ruby:3.2.2
+    working_dir: /app
+    volumes:
+      - ${PWD}:/app
+      - bundle:/usr/local/bundle
+    environment:
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
+    depends_on:
+      - mailhog
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  bundle:
