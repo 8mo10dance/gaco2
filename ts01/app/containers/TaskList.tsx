@@ -13,17 +13,25 @@ export default function TaskListContainer() {
   const [editingTaskUuid, setEditingTaskUuid] = useState("");
   const isEditing = (uuid: string) => uuid === editingTaskUuid;
   const handleAdd = () => {
-    const updater = (tasks: Task[]) => tasks.concat([newTask()]);
+    const task = newTask();
+    const updater = (tasks: Task[]) => tasks.concat([task]);
     setTasks(updater);
+    setEditingTaskUuid(task.uuid);
   };
-  const handleEdit = (uuid: string) => console.log(`edit ${uuid}`);
+  const handleEdit = (uuid: string) => {
+    setEditingTaskUuid(uuid);
+  };
   const handleRemove = (uuid: string) => {
     const updater = (tasks: Task[]) =>
       tasks.filter((task) => task.uuid !== uuid);
     setTasks(updater);
   };
-  const handleSubmit = (uuid: string, values: Values) =>
-    console.log(`submit ${uuid}`);
+  const handleSubmit = (uuid: string, values: Values) => {
+    const updater = (tasks: Task[]) =>
+      tasks.map((task) => (task.uuid === uuid ? { ...task, ...values } : task));
+    setTasks(updater);
+    setEditingTaskUuid("");
+  };
 
   return (
     <TaskListComponent
