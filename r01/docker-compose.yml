@@ -7,6 +7,9 @@ services:
     volumes:
       - ${PWD}:/app
       - bundle:/usr/local/bundle
+    environment:
+      MAILHOG_HOST: mailhog
+      MAILHOG_PORT: 1025
     depends_on:
       - mailhog
 

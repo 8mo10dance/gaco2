@@ -1,14 +1,14 @@
-require 'ruby-graphviz'
+require 'mail'
 
-# Create a new graph
-g = GraphViz.new( :G, :type => :digraph )
+mail = Mail.new do
+  from    'from@example.net'
+  to      'to@example.net'
+  subject 'This is Test Mail'
+  body    'Body.'
+end
 
-# Create two nodes
-hello = g.add_nodes( "Hello" )
-world = g.add_nodes( "World" )
+mail.delivery_method :smtp,
+                     address: ENV.fetch('MAILHOG_HOST', 'localhost'),
+                     port: ENV.fetch('MAILHOG_PORT', 1025)
 
-# Create an edge between the two nodes
-g.add_edges( hello, world )
-
-# Generate output image
-g.output( :png => "hello_world.png" )
+mail.deliver!
