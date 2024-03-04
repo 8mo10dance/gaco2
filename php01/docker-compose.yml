@@ -25,6 +25,12 @@ services:
       DB_PASSWORD: secret
       CACHE_DRIVER: file
       QUEUE_CONNECTION: sync
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_USERNAME: dummy
+      MAIL_PASSWORD: dummy
+      MAIL_ENCRYPTION: ''
     command: 'php -S 0.0.0.0:8000 -t public'
 
   mailhog:
