@@ -6,4 +6,7 @@ services:
       context: ./dockerdev/php
     working_dir: /app
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/server:/app
+    ports:
+      - '8000:8000'
+    command: 'php -S 0.0.0.0:8000 -t public'
