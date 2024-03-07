@@ -19,7 +19,11 @@ interaction:
         command: php artisan serve --host 0.0.0.0
         compose:
           run_options: [service-ports]
+  bundle:
+    service: ruby
+    command: bundle
 
 provision:
   - dip composer install
   - dip artisan key:generate
+  - dip bundle install

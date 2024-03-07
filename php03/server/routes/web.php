@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Redis;
+use App\Http\Controllers\EmailController;
 
 Route::get('/redis', function () {
     Redis::set('name', 'Laravel with Redis');
@@ -21,3 +22,5 @@ Route::get('/redis', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/send-email', [EmailController::class, 'sendEmail']);
