@@ -1,6 +1,6 @@
 version: '7.7'
 
 interaction:
-  bash:
+  bundle:
     service: rails
-    command: bash
+    command: bundle
