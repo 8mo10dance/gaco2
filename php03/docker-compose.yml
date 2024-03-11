@@ -44,8 +44,11 @@ services:
     image: ruby:3.2.2
     working_dir: /app
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/rails:/app
       - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    command: "bundle exec rails s -b 0.0.0.0"
     environment:
       MAILHOG_HOST: mailhog
       MAILHOG_PORT: 1025
