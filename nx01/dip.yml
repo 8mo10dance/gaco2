@@ -17,6 +17,6 @@ interaction:
           run_options: [service-ports]
 
 provision:
-  - npm install
-  - npm run build
+  - dip npm install
+  - dip npm run build
   - dip bundle install
