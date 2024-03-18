@@ -1,6 +1,9 @@
 version: '7.7'
 
 interaction:
+  npm:
+    service: front
+    command: npm
   bundle:
     service: rails
     command: bundle
@@ -14,4 +17,6 @@ interaction:
           run_options: [service-ports]
 
 provision:
+  - dip npm install
+  - dip npm run build
   - dip bundle install

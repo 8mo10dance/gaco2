@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  front:
+    image: node:21.6.2
+    working_dir: /app
+    volumes:
+      - ${PWD}/front:/app
+      - node_modules:/app/node_modules
+    command: npm run watch
+  nginx:
+    image: nginx:1.25.4
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PWD}/front/public:/usr/share/nginx/html
+      - ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro
+  rails:
+    image: ruby:3.2.2
+    working_dir: /app
+    volumes:
+      - ${PWD}/rails:/app
+      - bundle:/usr/local/bundle
+    ports:
+      - '3000:3000'
+    command: bundle exec rails s -b 0.0.0.0
+
+volumes:
+  bundle:
+  node_modules:

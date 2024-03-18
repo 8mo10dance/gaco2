@@ -1,10 +1,11 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.[contenthash].js'
   },
   mode: 'development',
   module: {
@@ -34,8 +35,10 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    compress: true,
-    port: 9000
-  }
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+    })
+  ]
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   useHistory,
@@ -9,9 +9,9 @@ import {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routing />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
@@ -42,7 +42,7 @@ function Home() {
       <h1>HOME</h1>
       <button
         onClick={() => {
-          history.replace("/");
+          history.replace("/about");
         }}
       >
         click
