@@ -15,8 +15,12 @@ interaction:
         command: bundle exec rails s -b 0.0.0.0
         compose:
           run_options: [service-ports]
+  rspec:
+    service: rails
+    command: bundle exec rspec
 
 provision:
   - dip npm install
   - dip npm run build
   - dip bundle install
+  - dip rails db:migrate
