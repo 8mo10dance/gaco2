@@ -41,16 +41,26 @@ services:
       - "6379:6379"
 
   ruby:
-    image: ruby:3.2.2
+    build:
+      context: ./rails
     working_dir: /app
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/rails:/app
       - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    command: "bundle exec rails s -b 0.0.0.0"
     environment:
       MAILHOG_HOST: mailhog
       MAILHOG_PORT: 1025
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: app_user
+      DB_PASSWORD: password
     depends_on:
       - mailhog
+      - db
 
   mailhog:
     image: mailhog/mailhog
