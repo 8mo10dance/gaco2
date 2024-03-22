@@ -10,6 +10,8 @@ services:
       - ${PWD}/client:/app
       - node_modules:/app/node_modules
     command: npm run dev
+    depends_on:
+      - localstack
   localstack:
     image: localstack/localstack:2.3.2
     ports:
