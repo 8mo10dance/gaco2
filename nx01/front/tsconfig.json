@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "strict": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext"
+  },
+  "include": ["src"]
+}
