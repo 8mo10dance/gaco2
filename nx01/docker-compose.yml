@@ -24,6 +24,9 @@ services:
     volumes:
       - ${PWD}/front/public:/usr/share/nginx/html
       - ${PWD}/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - front
+      - rails
   rails:
     build: ./rails
     working_dir: /app
