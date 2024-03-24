@@ -1,6 +1,9 @@
 {
   "name": "js01",
   "private": true,
+  "scripts": {
+    "build": "webpack --mode=development"
+  },
   "devDependencies": {
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
